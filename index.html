@@ -12,7 +12,7 @@
 
   <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
   <script>
-    const client = mqtt.connect('broker.emqx.io');
+    const client = mqtt.connect('mqtt://broker.emqx.io');
 
     client.on('connect', () => {
       document.getElementById('status').innerText = 'Connected';
