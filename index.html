@@ -12,11 +12,12 @@
 
   <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
   <script>
-    const client = mqtt.connect('mqtt://broker.emqx.io');
+    // Koneksi menggunakan WebSocket Secure (wss) ke broker EMQX di port 8084
+    const client = mqtt.connect('wss://broker.emqx.io:8084/mqtt');
 
     client.on('connect', () => {
       document.getElementById('status').innerText = 'Connected';
-      // Subscribe to a topic
+      // Subscribe ke topik 'juanproject1/msg'
       client.subscribe('juanproject1/msg', (err) => {
         if (!err) {
           console.log('Subscribed to juanproject1/msg');
@@ -25,7 +26,7 @@
     });
 
     client.on('message', (topic, message) => {
-      // Display the subscribed message
+      // Tampilkan pesan yang disubscribe ke dalam <ul>
       const li = document.createElement('li');
       li.textContent = message.toString();
       document.getElementById('messages').appendChild(li);
@@ -33,7 +34,7 @@
 
     function publishMessage() {
       const message = document.getElementById('message').value;
-      // Publish to a topic
+      // Publish ke topik 'juanproject1/lampu'
       client.publish('juanproject1/lampu', message);
     }
   </script>
