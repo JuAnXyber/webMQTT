@@ -1,0 +1,41 @@
+<html>
+<head>
+  <title>MQTT Client</title>
+</head>
+<body>
+  <h1>MQTT Client</h1>
+  <p>Status: <span id="status">Disconnected</span></p>
+  <input type="text" id="message" placeholder="Enter message" />
+  <button onclick="publishMessage()">Publish</button>
+  <p>Subscribed messages:</p>
+  <ul id="messages"></ul>
+
+  <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+  <script>
+    const client = mqtt.connect('wss://broker.hivemq.com:8000/mqtt');
+
+    client.on('connect', () => {
+      document.getElementById('status').innerText = 'Connected';
+      // Subscribe to a topic
+      client.subscribe('test/topic', (err) => {
+        if (!err) {
+          console.log('Subscribed to test/topic');
+        }
+      });
+    });
+
+    client.on('message', (topic, message) => {
+      // Display the subscribed message
+      const li = document.createElement('li');
+      li.textContent = message.toString();
+      document.getElementById('messages').appendChild(li);
+    });
+
+    function publishMessage() {
+      const message = document.getElementById('message').value;
+      // Publish to a topic
+      client.publish('test/topic', message);
+    }
+  </script>
+</body>
+</html>
