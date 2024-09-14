@@ -18,9 +18,9 @@
     client.on('connect', () => {
       document.getElementById('status').innerText = 'Connected';
       // Subscribe ke topik 'juanproject1/msg'
-      client.subscribe('juanproject1/lampu1', (err) => {
+      client.subscribe('juanproject1/lampu', (err) => {
         if (!err) {
-          console.log('Subscribed to juanproject1/lampu1');
+          console.log('Subscribed to juanproject1/lampu');
         }
       });
     });
