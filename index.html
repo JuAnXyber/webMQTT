@@ -12,14 +12,14 @@
 
   <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
   <script>
-    const client = mqtt.connect('wss://broker.hivemq.com:8000/mqtt');
+    const client = mqtt.connect('broker.emqx.io');
 
     client.on('connect', () => {
       document.getElementById('status').innerText = 'Connected';
       // Subscribe to a topic
-      client.subscribe('test/topic', (err) => {
+      client.subscribe('juanproject1/msg', (err) => {
         if (!err) {
-          console.log('Subscribed to test/topic');
+          console.log('Subscribed to juanproject1/msg');
         }
       });
     });
@@ -34,7 +34,7 @@
     function publishMessage() {
       const message = document.getElementById('message').value;
       // Publish to a topic
-      client.publish('test/topic', message);
+      client.publish('juanproject1/lampu', message);
     }
   </script>
 </body>
